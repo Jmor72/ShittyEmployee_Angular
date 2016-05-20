@@ -7,13 +7,13 @@ using System.Data;
 
 namespace ShittyEmployee_Angular
 {
-    public class DatabaseInit
+    class DatabaseInit
     {
         public SQLiteConnection sqlite_conn;
         public SQLiteCommand sqlite_cmd;
         public SQLiteDataReader sqlite_datareader;
 
-        public void Database()
+        public Database()
         {
             var sql_path = @"C:\dev\ShittyEmployee_SQLite\src\ShittyEmployee_SQLite\EmployeeDB.sqlite3";
             sqlite_conn = new SQLiteConnection($"Data Source={sql_path};version=3;");
