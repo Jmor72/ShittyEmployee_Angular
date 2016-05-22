@@ -1,25 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Data.SQLite;
-using System.Data;
+﻿
 
 namespace ShittyEmployee_Angular
 {
-    class DatabaseInit
+    public class DatabaseInit
     {
-        public SQLiteConnection sqlite_conn;
-        public SQLiteCommand sqlite_cmd;
-        public SQLiteDataReader sqlite_datareader;
-
-        public Database()
-        {
-            var sql_path = @"C:\dev\ShittyEmployee_SQLite\src\ShittyEmployee_SQLite\EmployeeDB.sqlite3";
-            sqlite_conn = new SQLiteConnection($"Data Source={sql_path};version=3;");
-            sqlite_conn.Open();
-            //sqlite_cmd = sqlite_conn.CreateCommand();
-            //SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=EmployeeDB.sqlite3;version=3.8.8.3;");
-        }
+        
+      //  public void InsertRow(string sqConnectionString)
+      //  {
+      //      //If the connection string is empty, use default.
+      //      if (sqConnectionString == "")
+      //      {
+      //          sqConnectionString = "Data Source=EmployeeDb.sqlite3;version=3;";
+      //      }
+      //      SQLiteConnection myConn = new SQLiteConnection(sqConnectionString);
+      //      string myInsertQuery = "INSERT INTO employee_table VALUES (1, '50')";
+      //      SQLiteCommand sqCommand = new SQLiteCommand(myInsertQuery);
+      //      sqCommand.Connection = myConn;
+      //      myConn.Open();
+      //      try
+      //      {
+      //          sqCommand.ExecuteNonQuery();
+      //      }
+      //      finally
+      //      {
+      //          myConn.Close();
+      //      }
+      //  }
     }
 }

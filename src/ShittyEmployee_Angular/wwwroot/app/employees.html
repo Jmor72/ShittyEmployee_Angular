@@ -1,0 +1,44 @@
+﻿<div class="container">
+
+    <div class="jumbotron">
+        <div class="container">
+            <h2 style="color: #ffd800;">Shitty Employee Manager</h2>
+            <p>
+                <a class="btn btn-primary" href="/create" role="button">Create Employee</a>
+                <a class="btn btn-danger" href="/home" role="button">Home</a>
+            </p>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <!-- Default Panel Contents -->
+        <div class="panel-heading"><h4>List of Shitty Employees</h4></div>
+        <!-- Shitty Employee Table, Zebra Striped class -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id:</th>
+                    <th>Name:</th>
+                    <th>Department:</th>
+                    <th>Supervisor:</th>
+                    <th>Salary:</th>
+                    <th>Address:</th>
+                    <th>Employed:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="employee in vm.employees">
+                    <th scope="row">{{employee.id}}</th>
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.department}}</td>
+                    <td>{{employee.supervisor}}</td>
+                    <td>{{employee.salary}}</td>
+                    <td>{{employee.address}}</td>
+                    <td>{{employee.employed}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

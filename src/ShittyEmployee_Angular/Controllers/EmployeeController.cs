@@ -24,6 +24,11 @@ namespace ShittyEmployee_Angular.Controllers
             return employees.ToArray();
         }
 
+        //This needs to be SqlCmd where connection is opened db then select from the table all employees
+        //sqlite_conn.Open();
+        //sqlite_cmd
+        //sqlite_conn.Close()
+
         // GET api/values/5
         [HttpGet("{id}")]
         public Employee Get(int id)
@@ -35,6 +40,10 @@ namespace ShittyEmployee_Angular.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            //This needs to be SqlCmd where connection is opened to db then insert statement from user input fields
+            //sqlite_conn.Open();
+            //sqlite_cmd
+            //sqlite_conn.Close();
         }
 
         // PUT api/values/5

@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Serialization;
+using ShittyEmployee_Angular.Models;
 
 namespace ShittyEmployee_Angular
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        private IApplicationEnvironment _appEnv;
+
+        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
+            _appEnv = appEnv;
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
@@ -27,6 +29,16 @@ namespace ShittyEmployee_Angular
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplicationInsightsTelemetry(Configuration);
+
+            var connection = Configuration["Data:DefaultConnection:ConnectionString"];
+            connection = connection.Replace("=", "=" + _appEnv.ApplicationBasePath + "/");
+            services.AddEntityFramework()
+                .AddSqlite()
+                .AddDbContext<EmployeeContext>(options => options.UseSqlite(connection)
+                .MigrationsAssembly("DataModel"));
+
+
             // Add framework services.
             services.AddMvc().AddJsonOptions(options =>
             {
@@ -36,11 +48,11 @@ namespace ShittyEmployee_Angular
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, EmployeeContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -54,13 +66,18 @@ namespace ShittyEmployee_Angular
             app.UseIISPlatformHandler();
 
             app.UseStaticFiles();
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                //Passes off any controller requests we don't recognize to the Home controller Index action
+                routes.MapRoute("spa-routes", "{*anything}", new { controller = "Home", action = "Index" });
             });
+
+            //Seed Data
+            SeedData.Initialize(context);
         }
 
         // Entry point for the application.
