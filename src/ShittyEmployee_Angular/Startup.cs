@@ -35,8 +35,8 @@ namespace ShittyEmployee_Angular
             connection = connection.Replace("=", "=" + _appEnv.ApplicationBasePath + "/");
             services.AddEntityFramework()
                 .AddSqlite()
-                .AddDbContext<EmployeeContext>(options => options.UseSqlite(connection)
-                .MigrationsAssembly("DataModel"));
+                .AddDbContext<EmployeeContext>(options => options.UseSqlite(connection));
+                
 
 
             // Add framework services.

@@ -9,53 +9,75 @@ using ShittyEmployee_Angular.Models;
 
 namespace ShittyEmployee_Angular.Controllers
 {
+    
+
+    private EmployeeContext _context { get; set; }
+
     [Route("api/[controller]")]
-    public class EmployeeController : Controller
+
+    public EmployeesController(EmployeeContext context)
     {
-        // GET: api/values
-        [HttpGet]
-        public Employee[] Get()
+        _context = context;
+    }
+    
+    // GET: api/employee
+    [HttpGet]
+    public IEnumerable<Employee> Get()
+    {
+        return _context.Employees.ToList();
+    }
+
+    // GET api/employee/5
+    [HttpGet("{id}")]
+    public Employee Get(int id)
+    {
+        return _context.Employees.FirstOrDefault(s => s.Id == id);
+    }
+
+    // POST api/employee
+    [HttpPost]
+    public void Post([FromBody]Employee employee)
+    {
+        _context.Employees.Add(employee);
+        _context.SaveChanges();
+    }
+
+    // PUT api/employee/5
+    [HttpPut("{id}")]
+    public void Put(int id, [FromBody]Employee employee)
+    {
+        _context.Employees.Update(employee);
+        _context.SaveChanges();
+    }
+
+    // DELETE api/employee/5
+    [HttpDelete("{id}")]
+    public void Delete(int id)
+    {
+        var student = _context.Employees.FirstOrDefault(t => t.Id == id);
+        if (student != null)
         {
-            var employees = new List<Employee>();
-            employees.Add(new Employee { Id = 1, Name = "Person 1", Department = "Sales1", Employed = 3, Supervisor = "supervisor 1", Salary = 35000, Address = "1234 Fake St." });
-            employees.Add(new Employee { Id = 2, Name = "Person 2", Department = "Sales2", Employed = 2, Supervisor = "supervisor 2", Salary = 535000, Address = "12fdsf4 Fake St." });
-            employees.Add(new Employee { Id = 3, Name = "Person 3", Department = "Sales3", Employed = 11, Supervisor = "supervisor 3", Salary = 35000, Address = "fdsf34 Fake St." });
-
-            return employees.ToArray();
-        }
-
-        //This needs to be SqlCmd where connection is opened db then select from the table all employees
-        //sqlite_conn.Open();
-        //sqlite_cmd
-        //sqlite_conn.Close()
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public Employee Get(int id)
-        {
-            return Get().Where(r => r.Id == id).FirstOrDefault();
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-            //This needs to be SqlCmd where connection is opened to db then insert statement from user input fields
-            //sqlite_conn.Open();
-            //sqlite_cmd
-            //sqlite_conn.Close();
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            _context.Employees.Remove(employee);
+            _context.SaveChanges();
         }
     }
+
+
+
+
+
+    // public class EmployeeController : Controller
+    // {
+    //     // GET: api/values
+    //     //[HttpGet]
+    //     //public Employee[] Get()
+    //     //{
+    //     //    var employees = new List<Employee>();
+    //     //    employees.Add(new Employee { Id = 1, Name = "Person 1", Department = "Sales1", Employed = 3, Supervisor = "supervisor 1", Salary = 35000, Address = "1234 Fake St." });
+    //     //    employees.Add(new Employee { Id = 2, Name = "Person 2", Department = "Sales2", Employed = 2, Supervisor = "supervisor 2", Salary = 535000, Address = "12fdsf4 Fake St." });
+    //     //    employees.Add(new Employee { Id = 3, Name = "Person 3", Department = "Sales3", Employed = 11, Supervisor = "supervisor 3", Salary = 35000, Address = "fdsf34 Fake St." });
+    //     //
+    //     //    return employees.ToArray();
+    //     //}
+    // }
 }
