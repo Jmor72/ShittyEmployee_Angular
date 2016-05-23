@@ -77,7 +77,7 @@ namespace ShittyEmployee_Angular
             });
 
             //Seed Data
-            SeedData.Initialize(context);
+            //SeedData.Initialize(context);
         }
 
         // Entry point for the application.
