@@ -13,6 +13,6 @@ namespace ShittyEmployee_Angular.Models
         public string Supervisor { get; set; }
         public int Salary { get; set; }
         public string Address { get; set; }
-        public int  Employed { get; set; }
+        public int Employed { get; set; }
     }
 }

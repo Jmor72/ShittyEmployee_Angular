@@ -9,44 +9,24 @@
         </div>
     </div>
 
-
+    
 
     <div class="panel panel-default">
         <!-- Default Panel Contents -->
         <div class="panel-heading"><h4>Create Shitty Employee</h4></div>
 
-
-        <div class="input-group">
-            <span class="input-group-addon" id="employee_name">Name</span>
-            <input type="text" class="form-control" placeholder="Shitty Employee Name" aria-describedby="basic-addon1">
-
-
-        </div>
-        <!-- All the inputs for creating a new employee-->
-        <div class="input-group">
-            <span class="input-group-addon" id="employee_department">Department</span>
-            <input type="text" class="form-control" placeholder="Department" aria-describedby="basic-addon1">
-        </div>
-
-        <div class="input-group">
-            <span class="input-group-addon" id="employee_employed">Years Employed</span>
-            <input type="text" class="form-control" placeholder="Years Employed" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon" id="employee_supervisor">Supervisor</span>
-            <input type="text" class="form-control" placeholder="Supervisor" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon" id="employee_salary">Salary</span>
-            <input type="text" class="form-control" placeholder="Shitty Salary" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon" id="employee_address">Address</span>
-            <input type="text" class="form-control" placeholder="Address" aria-describedby="basic-addon1">
-        </div>
-
+        <form name="employeeForm" ng-submit="submitForm()">
+            <input type="text" class="form-control" placeholder="Id" ng-model="employee.id" />
+            <input type="text" class="form-control" placeholder="Name" ng-model="employee.name" />
+            <input type="text" class="form-control" placeholder="Department" ng-model="employee.department" />
+            <input type="text" class="form-control" placeholder="Employed" ng-model="employee.employed" />
+            <input type="text" class="form-control" placeholder="Supervisor" ng-model="employee.supervisor" />
+            <input type="text" class="form-control" placeholder="Salary" ng-model="employee.salary" />
+            <input type="text" class="form-control" placeholder="Address" ng-model="employee.address" />
+        </form>
+        
         <div class="btn" role="button">
-            <button type="button" class="btn btn-default">Create Employee</button>
+            <button ng-submit ng-click="submitForm()"type="button" class="btn btn-danger">Create Employee</button>
         </div>
     </div>
 

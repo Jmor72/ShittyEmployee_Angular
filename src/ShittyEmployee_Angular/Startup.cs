@@ -29,15 +29,13 @@ namespace ShittyEmployee_Angular
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApplicationInsightsTelemetry(Configuration);
+            //services.AddApplicationInsightsTelemetry(Configuration);
 
             var connection = Configuration["Data:DefaultConnection:ConnectionString"];
             connection = connection.Replace("=", "=" + _appEnv.ApplicationBasePath + "/");
             services.AddEntityFramework()
                 .AddSqlite()
                 .AddDbContext<EmployeeContext>(options => options.UseSqlite(connection));
-                
-
 
             // Add framework services.
             services.AddMvc().AddJsonOptions(options =>
@@ -77,7 +75,7 @@ namespace ShittyEmployee_Angular
             });
 
             //Seed Data
-            //SeedData.Initialize(context);
+            SeedData.Initialize(context);
         }
 
         // Entry point for the application.
