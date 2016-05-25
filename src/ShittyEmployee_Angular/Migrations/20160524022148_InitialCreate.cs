@@ -12,18 +12,18 @@ namespace ShittyEmployee_Angular.Migrations
                 name: "Employee",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Address = table.Column<string>(nullable: true),
-                    Department = table.Column<string>(nullable: true),
-                    Employed = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Salary = table.Column<int>(nullable: false),
-                    Supervisor = table.Column<string>(nullable: true)
+                    address = table.Column<string>(nullable: true),
+                    department = table.Column<string>(nullable: true),
+                    employed = table.Column<int>(nullable: false),
+                    name = table.Column<string>(nullable: true),
+                    salary = table.Column<int>(nullable: false),
+                    supervisor = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employee", x => x.Id);
+                    table.PrimaryKey("PK_Employee", x => x.id);
                 });
         }
 

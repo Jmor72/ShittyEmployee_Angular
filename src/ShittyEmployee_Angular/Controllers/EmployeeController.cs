@@ -17,7 +17,8 @@ namespace ShittyEmployee_Angular.Controllers
         {
             _context = context;
         }
-
+        
+        //Place one of these before each API Method...
         [Route("api/[controller]")]
 
         // GET: api/employee
@@ -35,6 +36,7 @@ namespace ShittyEmployee_Angular.Controllers
             return _context.Employees.FirstOrDefault(s => s.Id == id);
         }
 
+        [Route("api/[controller]")]
         // POST api/employee
         [HttpPost]
         public void Post([FromBody]Employee employee)

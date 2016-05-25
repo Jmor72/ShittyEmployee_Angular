@@ -69,13 +69,15 @@ namespace ShittyEmployee_Angular
             {
                 routes.MapRoute(
                     name: "default",
+                    //Passes off back end controller requests
                     template: "{controller=Home}/{action=Index}/{id?}");
-                //Passes off any controller requests we don't recognize to the Home controller Index action
+                
+                //Passes off any controller requests we don't recognize to the Home controller Index action (front end)
                 routes.MapRoute("spa-routes", "{*anything}", new { controller = "Home", action = "Index" });
             });
 
-            //Seed Data
-            SeedData.Initialize(context);
+            //Seed Data - only needed once for initial migrations but keeping here for my sake.
+            //SeedData.Initialize(context);
         }
 
         // Entry point for the application.
